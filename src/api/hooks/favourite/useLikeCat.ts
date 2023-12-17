@@ -4,7 +4,7 @@ import { useClient } from "api/the-cat-api/useClient"
 import { queryKeys } from "api/queryKeys"
 import queryClient from "api/queryClient"
 
-const useFavouriteCat = () => {
+const useLikeCat = () => {
     const client = useClient()
 
     const likePic = useCallback(async (imgId: string) => {
@@ -24,4 +24,4 @@ const useFavouriteCat = () => {
     })
 }
 
-export { useFavouriteCat }
+export { useLikeCat as useFavouriteCat }

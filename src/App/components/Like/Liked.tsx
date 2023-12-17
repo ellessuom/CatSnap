@@ -1,8 +1,8 @@
 import Liked from 'assets/icons/liked.svg?react'
 import Unliked from 'assets/icons/unliked.svg?react'
 import classes from './Like.module.scss'
-import { useFavouriteCat } from 'api/hooks/useFavouriteCat'
-import { useDeleteFavouriteCat } from 'api/hooks/useDeleteFavouriteCat'
+import { useFavouriteCat } from 'api/hooks/favourite/useLikeCat'
+import { useDislikeCat } from 'api/hooks/favourite/useDislikeCat'
 
 type Props = {
   isLiked: boolean
@@ -13,7 +13,7 @@ type Props = {
 const Like = ({ isLiked, imgId, likeId }: Props) => {
   // const [isActive, setIsActive] = useState(isLiked)
   const { mutateAsync: sendLike } = useFavouriteCat()
-  const { mutateAsync: removeLike } = useDeleteFavouriteCat()
+  const { mutateAsync: removeLike } = useDislikeCat()
 
   const handleClick = async () => {
     if (isLiked && likeId) {

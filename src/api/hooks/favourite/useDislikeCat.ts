@@ -4,7 +4,7 @@ import { queryKeys } from "api/queryKeys"
 import { useClient } from "api/the-cat-api/useClient"
 import queryClient from "api/queryClient"
 
-export const useDeleteFavouriteCat = () => {
+export const useDislikeCat = () => {
     const client = useClient()
 
     const deleteLike = useCallback(async (likeId: number) => {

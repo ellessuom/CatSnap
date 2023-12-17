@@ -1,7 +1,7 @@
 import Arrow from 'assets/icons/arrow.svg?react'
 import classes from './Vote.module.scss'
 import classNames from 'classnames'
-import { useVoteCat } from 'api/hooks/useVoteCat'
+import { useVoteCat } from 'api/hooks/vote/useVoteCat'
 import { useState } from 'react'
 
 type Props = {

@@ -2,7 +2,7 @@ import { useEffect, useMemo } from "react"
 import { useGetCatsList } from "api/hooks/useGetCatsList"
 import classes from './Content.module.scss'
 import Footer from "../Footer"
-import { useGetFavourites } from "api/hooks/useGetFavourites"
+import { useGetFavourites } from "api/hooks/favourite/useGetFavourites"
 import { FavouriteResponse } from "@thatapicompany/thecatapi/dist/types"
 import keyBy from 'lodash.keyby'
 import mapValues from 'lodash.mapvalues'
