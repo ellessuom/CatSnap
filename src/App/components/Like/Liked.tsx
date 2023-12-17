@@ -1,21 +1,26 @@
 import Liked from 'assets/icons/liked.svg?react'
 import Unliked from 'assets/icons/unliked.svg?react'
 import classes from './Like.module.scss'
-import { useState } from 'react'
 import { useFavouriteCat } from 'api/hooks/useFavouriteCat'
+import { useDeleteFavouriteCat } from 'api/hooks/useDeleteFavouriteCat'
 
 type Props = {
-  liked: boolean
+  isLiked: boolean
   imgId: string
+  likeId?: number
 }
 
-const Like = ({ liked, imgId }: Props) => {
-  const [isLiked, setIsLiked] = useState(liked)
-  const { mutateAsync: updateLike } = useFavouriteCat()
+const Like = ({ isLiked, imgId, likeId }: Props) => {
+  // const [isActive, setIsActive] = useState(isLiked)
+  const { mutateAsync: sendLike } = useFavouriteCat()
+  const { mutateAsync: removeLike } = useDeleteFavouriteCat()
 
   const handleClick = async () => {
-    await updateLike(imgId)
-    setIsLiked((state) => !state)
+    if (isLiked && likeId) {
+      await removeLike(likeId)
+    } else {
+      await sendLike(imgId)
+    }
   }
 
   // Note: the type UserImageResponse contains `favourite?` which is used here to initialise

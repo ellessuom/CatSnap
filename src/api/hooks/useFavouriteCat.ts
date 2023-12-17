@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query"
 import { useCallback } from "react"
 import { useClient } from "api/the-cat-api/useClient"
 import { queryKeys } from "api/queryKeys"
+import queryClient from "api/queryClient"
 
 const useFavouriteCat = () => {
     const client = useClient()
@@ -16,7 +17,10 @@ const useFavouriteCat = () => {
         mutationFn: async (imgId: string) => {
             return likePic(imgId)
         },
-        mutationKey: queryKeys.favouriteCat
+        mutationKey: queryKeys.favouriteCat,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: queryKeys.getFavourites })
+        }
     })
 }
 
