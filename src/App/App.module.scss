@@ -28,7 +28,7 @@
   &__Dropzone {
     @include unbuttonize();
     cursor: pointer;
-    border-radius: 7px;
+    border-radius: $border-radius;
     color: $accent-secondary;
     text-align: center;
     padding: 40px 150px;

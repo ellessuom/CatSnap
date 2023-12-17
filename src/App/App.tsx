@@ -28,7 +28,6 @@ function App() {
     <div className={classes.AppContainer}>
       <header>
         <Logo />
-        <p>Uploading: {String(isPending)}</p>
       </header>
 
       <main
