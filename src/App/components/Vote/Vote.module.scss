@@ -1,5 +1,16 @@
 @import 'assets/styles/base';
 
+.Container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    p {
+        padding: 0 10px;
+    }
+}
+
 .Icon {
     @include unbuttonize();
 
@@ -12,7 +23,6 @@
     &__Upvote {
         stroke: $accent-secondary;
         stroke-width: 3px;
-        margin-right: 15px;
 
         &:hover {
             stroke: white;

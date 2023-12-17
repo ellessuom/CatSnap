@@ -4,5 +4,6 @@ export const queryKeys = {
     favouriteCat: ['favouriteCat'],
     voteCat: ['voteCat'],
     deleteLike: ['deleteLike'],
-    getFavourites: ['getFavourites']
+    getFavourites: ['getFavourites'],
+    getVotes: ['getVotes'],
 } as const

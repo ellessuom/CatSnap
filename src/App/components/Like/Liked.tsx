@@ -11,7 +11,6 @@ type Props = {
 }
 
 const Like = ({ isLiked, imgId, likeId }: Props) => {
-  // const [isActive, setIsActive] = useState(isLiked)
   const { mutateAsync: sendLike } = useFavouriteCat()
   const { mutateAsync: removeLike } = useDislikeCat()
 

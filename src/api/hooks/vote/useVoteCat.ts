@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query"
 import { useCallback } from "react"
 import { useClient } from "api/the-cat-api/useClient"
 import { queryKeys } from "api/queryKeys"
+import queryClient from "api/queryClient"
 
 type UseVoteCat = {
     imgId: string
@@ -22,7 +23,10 @@ const useVoteCat = () => {
         mutationFn: async ({imgId, value}: UseVoteCat) => {
             return likePic(imgId, value)
         },
-        mutationKey: queryKeys.voteCat
+        mutationKey: queryKeys.voteCat,
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: queryKeys.getVotes })
+        }
     })
 }
 
