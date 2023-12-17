@@ -1,8 +1,13 @@
 @import 'assets/styles/base';
 
 .Content {
+  @include centerize();
   display: flex;
-  @include centerize()
+  padding: 0 20px;
+
+  @media (max-width: $screen-small-size) {
+    padding: 0;
+  }
 }
 
 .Gallery {
@@ -26,24 +31,15 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    aspect-ratio: 1 / 1;
-    /* Ensures each item is a square */
-    border-radius: $border-radius;
-
+    
     img {
+      aspect-ratio: 1 / 1;
+      border-radius: $border-radius;
       height: 100%;
       width: 100%;
       object-fit: cover;
       /* Ensures images cover the area without stretching */
       display: block;
     }
-  }
-
-  &__Post_Footer {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    color: $accent-secondary;
   }
 }

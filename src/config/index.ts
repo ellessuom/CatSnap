@@ -3,6 +3,7 @@ export default {
         baseCat: 'https://api.thecatapi.com'
     },
     consts: {
-        GET_CAT_LIST_LIMIT: 10
+        GET_CAT_LIST_LIMIT: 10,
+        CAT_SUB_ID: 'brigh-ascension'
     }
 }

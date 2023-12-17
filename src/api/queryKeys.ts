@@ -1,3 +1,6 @@
 export const queryKeys = {
-    getCatsList: ['getCatsList'] as const
-}
+    getCatsList: ['getCatsList'],
+    uploadCatPic: ['uploadCatPic'],
+    favouriteCat: ['favouriteCat'],
+    voteCat: ['voteCat']
+} as const

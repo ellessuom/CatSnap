@@ -1,8 +1,12 @@
 $dark-background: #2C333B;
 $accent-secondary: #8895A4;
 
-$screen-mid-size: 1360px;
-$screen-small-size: 680px;
+$main-horizontal-padding: 20px;
+$min-img-size: 340px;
+
+$screen-mid-size: $min-img-size * 4 + $main-horizontal-padding * 4;
+$screen-small-size: $min-img-size * 2 + $main-horizontal-padding;
+$red-accent: #D64848;
 
 $border-radius: 7px;
 
