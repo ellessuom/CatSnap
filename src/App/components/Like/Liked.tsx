@@ -18,10 +18,14 @@ const Like = ({ liked, imgId }: Props) => {
     setIsLiked((state) => !state)
   }
 
+  // Note: the type UserImageResponse contains `favourite?` which is used here to initialise
+  // the Like status, but this value doesn't seem to be returned. Possible workarounds:
+  // - pass an account ID to both pic upload and list fetch
+  // - retrieve additional info with /favourites/:image_id
   return (
     <button className={classes.Like} onClick={handleClick}>
       {
-        isLiked? <Liked /> : <Unliked />
+        isLiked ? <Liked /> : <Unliked />
       }
     </button>
   )
