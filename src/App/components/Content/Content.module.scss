@@ -1,0 +1,39 @@
+@import 'assets/styles/base';
+
+.Content {
+    display: flex;
+    @include centerize()
+}
+
+.Gallery {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(340px, 1fr));
+    grid-gap: 20px;
+    width: min(2000px, 100vw);
+  
+    @media (max-width: $screen-mid-size) { // Adjust for when 4 columns can't fit
+      grid-template-columns: repeat(2, minmax(340px, 1fr));
+    }
+  
+    @media (max-width: $screen-small-size) { // Adjust for when 2 columns can't fit
+      grid-template-columns: repeat(1, minmax(340px, 1fr));
+    }
+
+    &__Post {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        aspect-ratio: 1 / 1;
+        // max-width: 500px;
+        /* Ensures each item is a square */
+
+        img {
+            border-radius: 7px;
+            height: 100%;
+            object-fit: cover;
+            /* Ensures images cover the area without stretching */
+            display: block;
+        }
+    }
+}

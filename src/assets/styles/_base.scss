@@ -1,2 +1,27 @@
 $dark-background: #2C333B;
 $accent-secondary: #8895A4;
+
+$screen-mid-size: 1360px;
+$screen-small-size: 680px;
+
+@mixin unbuttonize {
+    // https://gist.github.com/zastrow/bb43d2b256d52738e0ffdee7f825e79f
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    padding: 0;
+    text-align: inherit;
+    font: inherit;
+    border-radius: 0;
+    appearance: none;
+
+    &:focus {
+      outline: 1px solid rgb(100, 206, 236);
+    }
+  }
+
+  @mixin centerize {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

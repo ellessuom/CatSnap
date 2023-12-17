@@ -11,26 +11,46 @@
     flex-direction: row;
     align-items: center;
     border-bottom: 1px solid darken($accent-secondary, 20);
-    margin-bottom: 20px;;
+    padding: 0 40px;
   }
 }
 
 .Main {
-    flex-grow: 1;
-    transition: 200ms;
-}
-
-.DragStyle {
-    background-color: lighten($dark-background, 5);
+  flex-grow: 1;
+  transition: 200ms;
 }
 
 .DragAndDrop {
+  width: 100%;
+  display: flex;
+  place-content: center;
+
+  &__Dropzone {
+    @include unbuttonize();
+    cursor: pointer;
+    border-radius: 7px;
     color: $accent-secondary;
     text-align: center;
-
-    &__Img {
-        width: 25px;
-        height: 25px;
-        fill: $accent-secondary;
+    padding: 40px 150px;
+    &:hover {
+      @extend .DragActive;
     }
+
+  }
+
+  &__Img {
+    width: 25px;
+    height: 25px;
+    fill: $accent-secondary;
+  }
 }
+
+.DragActive {
+  background-color: lighten($dark-background, 2);
+}
+
+@media (max-width: 600px) {
+  .DragAndDrop__Dropzone {
+    display: none;
+  }
+} 

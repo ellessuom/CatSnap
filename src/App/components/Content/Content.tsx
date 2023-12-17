@@ -1,9 +1,21 @@
 import { useGetCatsList } from "api/hooks/useGetCatsList"
+import classes from './Content.module.scss'
+import { useEffect } from "react"
 
-const Content = () => {
-  const { data, isLoading, isError } = useGetCatsList()
+type Props = {
+  refresh: boolean
+}
 
-  if (isLoading) {
+const Content = ({ refresh }: Props) => {
+  const { data, isLoading, isRefetching, isError, refetch } = useGetCatsList()
+
+  useEffect(() => {
+    if (refresh) {
+      refetch()
+    }
+  }, [refresh])
+
+  if (isLoading || isRefetching) {
     return <p>Loading...</p>
   }
 
@@ -16,13 +28,17 @@ const Content = () => {
   }
 
   return (
-    <ul>
-      {
-        data.map((img) => (
-          <li>{img.url}</li>
-        ))
-      }
-    </ul>
+    <div className={classes.Content}>
+      <ul className={classes.Gallery}>
+        {
+          data.map((img) => (
+            <li className={classes.Gallery__Post}>
+              <img src={img.url} alt={`Image with ID ${img.id}`} />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
   )
 }
 
