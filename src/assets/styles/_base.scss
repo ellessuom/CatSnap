@@ -4,6 +4,8 @@ $accent-secondary: #8895A4;
 $screen-mid-size: 1360px;
 $screen-small-size: 680px;
 
+$border-radius: 7px;
+
 @mixin unbuttonize {
     // https://gist.github.com/zastrow/bb43d2b256d52738e0ffdee7f825e79f
     background-color: transparent;
