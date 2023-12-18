@@ -17,6 +17,7 @@
 .Main {
   flex-grow: 1;
   transition: 200ms;
+  padding-bottom: 40px;
 }
 
 .DragAndDrop {
@@ -34,7 +35,6 @@
     &:hover {
       @extend .DragActive;
     }
-
   }
 
   &__Img {
@@ -53,4 +53,4 @@
   .DragAndDrop__Dropzone {
     display: none;
   }
-} 
+}

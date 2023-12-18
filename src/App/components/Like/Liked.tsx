@@ -1,8 +1,8 @@
-import Liked from 'assets/icons/liked.svg?react'
-import Unliked from 'assets/icons/unliked.svg?react'
+import { ReactComponent as Liked } from 'src/assets/icons/liked.svg'
+import { ReactComponent as Unliked } from 'src/assets/icons/unliked.svg'
 import classes from './Like.module.scss'
-import { useFavouriteCat } from 'api/hooks/favourite/useLikeCat'
-import { useDislikeCat } from 'api/hooks/favourite/useDislikeCat'
+import { useFavouriteCat } from 'src/api/hooks/favourite/useLikeCat'
+import { useDislikeCat } from 'src/api/hooks/favourite/useDislikeCat'
 
 type Props = {
   isLiked: boolean
@@ -22,18 +22,11 @@ const Like = ({ isLiked, imgId, likeId }: Props) => {
     }
   }
 
-  // Note: the type UserImageResponse contains `favourite?` which is used here to initialise
-  // the Like status, but this value doesn't seem to be returned. Possible workarounds:
-  // - pass an account ID to both pic upload and list fetch
-  // - retrieve additional info with /favourites/:image_id
   return (
     <button className={classes.Like} onClick={handleClick}>
-      {
-        isLiked ? <Liked /> : <Unliked />
-      }
+      {isLiked ? <Liked data-testid="svg-liked" /> : <Unliked data-testid="svg-unliked" />}
     </button>
   )
 }
-
 
 export default Like

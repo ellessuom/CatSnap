@@ -1,10 +1,10 @@
 @import 'assets/styles/base';
 
 .Like {
-    @include unbuttonize();
-    margin-right: 20px;
-    svg {
-        height: 20px;
-        width: 20px;
-    }
+  @include unbuttonize();
+  margin-right: 20px;
+  svg {
+    height: 20px;
+    width: 20px;
+  }
 }
