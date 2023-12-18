@@ -1,11 +1,12 @@
 import Arrow from 'assets/icons/arrow.svg?react'
 import classes from './Vote.module.scss'
 import classNames from 'classnames'
-import { useVoteCat } from 'api/hooks/useVoteCat'
-import { useState } from 'react'
+import { useVoteCat } from 'api/hooks/vote/useVoteCat'
+// import { useState } from 'react'
 
 type Props = {
   imgId: string
+  votes: number
 }
 
 type VoteProps = {
@@ -14,44 +15,47 @@ type VoteProps = {
 }
 
 const Upvote = ({ active, onClick }: VoteProps) => {
-  const [isActive, setIsActive] = useState(active)
+  // const [isActive, setIsActive] = useState(active)
   const handleClick = () => {
-    setIsActive((state) => !state)
+    // setIsActive((state) => !state)
     onClick()
   }
-  
+
   return (
     <button className={classes.Icon} onClick={handleClick}>
       <Arrow className={classNames(
         classes.Icon__Arrow,
         classes.Icon__Upvote,
-        isActive && classes.Active)} />
+        // isActive && classes.Active
+      )} />
     </button>
   )
 }
 
 const Downvote = ({ active, onClick }: VoteProps) => {
-  const [isActive, setIsActive] = useState(active)
+  // const [isActive, setIsActive] = useState(active)
   const handleClick = () => {
-    setIsActive((state) => !state)
+    // setIsActive((state) => !state)
     onClick()
   }
-  
+
   return (
     <button className={classes.Icon} onClick={handleClick}>
       <Arrow className={classNames(
         classes.Icon__Arrow,
         classes.Icon__Downvote,
-        isActive && classes.Active)} />
+        // isActive && classes.Active
+      )} />
     </button>
   )
 }
 
-const Vote = ({ imgId }: Props) => {
+const Vote = ({ imgId, votes }: Props) => {
   const { mutateAsync: sendVote } = useVoteCat()
   return (
-    <div>
+    <div className={classes.Container}>
       <Upvote active={false} onClick={() => sendVote({ imgId, value: 1 })} />
+      <p>{votes}</p>
       <Downvote active={false} onClick={() => sendVote({ imgId, value: -1 })} />
     </div>
   )
