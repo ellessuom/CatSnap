@@ -1,7 +1,7 @@
-import Arrow from 'assets/icons/arrow.svg?react'
+import { ReactComponent as Arrow } from 'src/assets/icons/arrow.svg'
 import classes from './Vote.module.scss'
 import classNames from 'classnames'
-import { useVoteCat } from 'api/hooks/vote/useVoteCat'
+import { useVoteCat } from 'src/api/hooks/vote/useVoteCat'
 // import { useState } from 'react'
 
 type Props = {
@@ -22,12 +22,14 @@ const Upvote = ({ active, onClick }: VoteProps) => {
   }
 
   return (
-    <button className={classes.Icon} onClick={handleClick}>
-      <Arrow className={classNames(
-        classes.Icon__Arrow,
-        classes.Icon__Upvote,
-        // isActive && classes.Active
-      )} />
+    <button data-testid="svg-arrow-up" className={classes.Icon} onClick={handleClick}>
+      <Arrow
+        className={classNames(
+          classes.Icon__Arrow,
+          classes.Icon__Upvote
+          // isActive && classes.Active
+        )}
+      />
     </button>
   )
 }
@@ -40,12 +42,14 @@ const Downvote = ({ active, onClick }: VoteProps) => {
   }
 
   return (
-    <button className={classes.Icon} onClick={handleClick}>
-      <Arrow className={classNames(
-        classes.Icon__Arrow,
-        classes.Icon__Downvote,
-        // isActive && classes.Active
-      )} />
+    <button data-testid="svg-arrow-down" className={classes.Icon} onClick={handleClick}>
+      <Arrow
+        className={classNames(
+          classes.Icon__Arrow,
+          classes.Icon__Downvote
+          // isActive && classes.Active
+        )}
+      />
     </button>
   )
 }

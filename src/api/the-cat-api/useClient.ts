@@ -1,24 +1,38 @@
-import { useMemo } from 'react'
-import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
-import config from 'config'
+import config from 'src/config'
 
-const catToken: string = import.meta.env.VITE_CAT_TOKEN
+const catToken = process.env.REACT_APP_CAT_TOKEN
 
-export const useClient = (version = 'v1', axiosConfig?: AxiosRequestConfig) => {
-    const createInstance = () => {
-        const instance = axios.create(axiosConfig ?? {})
+type Body = string | FormData
 
-        instance.defaults.baseURL = `${config.endpoints.baseCat}/${version}`
+export const useClient = (skipDefaultHeaders?: boolean) => {
+  const baseURL = `${config.endpoints.baseCat}/v1`
 
-        instance.interceptors.request.use((interceptedConfig) => {
-            interceptedConfig.headers['x-api-key'] = catToken ?? 'OHNO'
-
-            return interceptedConfig
-        })
-
-        return instance
+  const makeRequest = async <T>(url: string, method: string, body?: Body) => {
+    let headers: HeadersInit = {
+      'x-api-key': catToken ?? 'OHNO',
     }
 
-    const client: AxiosInstance = useMemo(createInstance, [axiosConfig, version])
-    return client
+    // If the body is FormData, let the browser set the Content-Type header
+    if (!(body instanceof FormData)) {
+      headers = { ...headers, 'Content-Type': 'application/json' }
+    }
+
+    const response = await fetch(`${baseURL}${url}`, {
+      method,
+      headers,
+      body: body ?? null,
+    })
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`)
+    }
+
+    return response.json() as Promise<T>
+  }
+
+  return {
+    get: <T>(url: string) => makeRequest<T>(url, 'GET'),
+    post: <T>(url: string, body: Body) => makeRequest<T>(url, 'POST', body),
+    delete: <T>(url: string) => makeRequest<T>(url, 'DELETE'),
+  }
 }

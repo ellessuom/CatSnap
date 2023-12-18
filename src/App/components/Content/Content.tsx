@@ -1,12 +1,12 @@
-import { useEffect, useMemo } from "react"
-import { useGetCatsList } from "api/hooks/useGetCatsList"
-import classes from './Content.module.scss'
-import Footer from "../Footer"
-import { useGetFavourites } from "api/hooks/favourite/useGetFavourites"
-import { FavouriteResponse } from "@thatapicompany/thecatapi/dist/types"
+import { useEffect, useMemo } from 'react'
+import { FavouriteResponse } from '@thatapicompany/thecatapi/dist/types'
 import keyBy from 'lodash.keyby'
 import mapValues from 'lodash.mapvalues'
-import { useGetVotes } from "api/hooks/vote/useGetVotes"
+import { useGetCatsList } from 'src/api/hooks/useGetCatsList'
+import { useGetVotes } from 'src/api/hooks/vote/useGetVotes'
+import { useGetFavourites } from 'src/api/hooks/favourite/useGetFavourites'
+import Footer from '../Footer'
+import classes from './Content.module.scss'
 
 type Props = {
   refresh: boolean
@@ -21,9 +21,12 @@ type VotesMapped = {
   [key: string]: number
 }
 
-const getListMapped = <T,K>(list?: T[]) => {
+export const getListMapped = <T, K>(list?: T[]) => {
   if (list?.length) {
-    return mapValues(keyBy(list, 'image_id'), ({ image_id, ...rest }: { image_id: string }) => rest) as K
+    return mapValues(
+      keyBy(list, 'image_id'),
+      ({ image_id, ...rest }: { image_id: string }) => rest
+    ) as K
   }
   return {} as K
 }
@@ -33,8 +36,11 @@ const Content = ({ refresh }: Props) => {
   const { data: favourites, isError: isFavError } = useGetFavourites()
   const { data: votes, isError: isVotesError } = useGetVotes()
 
-  const favouritesMapped = useMemo(() => getListMapped<FavouriteResponse, FavouritesMapped>(favourites), [favourites])
-  
+  const favouritesMapped = useMemo(
+    () => getListMapped<FavouriteResponse, FavouritesMapped>(favourites),
+    [favourites]
+  )
+
   const votesMapped = useMemo(() => {
     if (votes?.length) {
       return votes.reduce((output, item) => {
@@ -74,15 +80,17 @@ const Content = ({ refresh }: Props) => {
       {isRefetching && <p>Updating...</p>}
       <div className={classes.Content}>
         <ul className={classes.Gallery}>
-          {
-            data.map((img) => (
-              <li key={img.id} className={classes.Gallery__Post}>
-                <img src={img.url} alt={`Image with ID ${img.id}`} />
+          {data.map((img) => (
+            <li key={img.id} className={classes.Gallery__Post}>
+              <img src={img.url} alt={String(img.id)} />
 
-                <Footer img={img} likeId={favouritesMapped[img.id]?.id} votes={votesMapped[img.id] ?? 0} />
-              </li>
-            ))
-          }
+              <Footer
+                img={img}
+                likeId={favouritesMapped[img.id]?.id}
+                votes={votesMapped[img.id] ?? 0}
+              />
+            </li>
+          ))}
         </ul>
       </div>
     </>

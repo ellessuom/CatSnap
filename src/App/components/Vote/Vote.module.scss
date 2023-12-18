@@ -1,51 +1,51 @@
 @import 'assets/styles/base';
 
 .Container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 
-    p {
-        padding: 0 10px;
-    }
+  p {
+    padding: 0 10px;
+  }
 }
 
 .Icon {
-    @include unbuttonize();
+  @include unbuttonize();
 
-    &__Arrow {
-        height: 20px;
-        width: 20px;
-        transition: 200ms;
+  &__Arrow {
+    height: 20px;
+    width: 20px;
+    transition: 200ms;
+  }
+
+  &__Upvote {
+    stroke: $accent-secondary;
+    stroke-width: 3px;
+
+    &:hover {
+      stroke: white;
     }
 
-    &__Upvote {
-        stroke: $accent-secondary;
-        stroke-width: 3px;
+    &.Active {
+      fill: $accent-secondary;
+      stroke: none;
+    }
+  }
 
-        &:hover {
-            stroke: white;
-        }
+  &__Downvote {
+    stroke-width: 3px;
+    transform: rotate(180deg);
+    stroke: $accent-secondary;
 
-        &.Active {
-            fill: $accent-secondary;
-            stroke: none;
-        }
+    &:hover {
+      stroke: $red-accent;
     }
 
-    &__Downvote {
-        stroke-width: 3px;;
-        transform: rotate(180deg);
-        stroke: $accent-secondary;
-
-        &:hover {
-            stroke: $red-accent;
-        }
-
-        &.Active {
-            fill: $red-accent;
-            stroke: none;
-        }
+    &.Active {
+      fill: $red-accent;
+      stroke: none;
     }
+  }
 }
